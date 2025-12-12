@@ -27,7 +27,3 @@ jobs:
         run:  mvn test -Dprotobuf.skip=true
         env:
           SPRING_PROFILES_ACTIVE: test
-
-      # Генерирует HTML-отчёт о тестах
-      - name: Generate test Report
-        run: mvn surefire-report:report
