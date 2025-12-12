@@ -1,0 +1,33 @@
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on:
+  push:
+    branches:
+      - main
+      - ci
+  pull_request:
+    branches:
+      - main
+jobs:
+  init:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java-version: ['17']
+    container:
+      image: maven:3.9-eclipse-temurin-17
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+
+
+      # Запускаются тесты из папки test
+      - name: Run mvn test Java ${{ matrix.java-version }}
+        run:  mvn test -Dprotobuf.skip=true
+        env:
+          SPRING_PROFILES_ACTIVE: test
+
+      # Генерирует HTML-отчёт о тестах
+      - name: Generate test Report
+        run: mvn surefire-report:report
