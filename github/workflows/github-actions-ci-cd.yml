@@ -1,10 +1,9 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: GitHub Actions
+run-name: ${{ github.actor }} products-service github-actions
 on:
   push:
     branches:
-      - main
-      - ci
+      - master
   pull_request:
     branches:
       - main
@@ -13,9 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java-version: ['17']
+        java-version: ['21']
     container:
-      image: maven:3.9-eclipse-temurin-17
+      image: maven:3.9-eclipse-temurin-21
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
